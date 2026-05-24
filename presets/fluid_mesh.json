@@ -1,0 +1,49 @@
+{
+  "id": "fluid_interactive",
+  "name": "Fluid Glass",
+  "description": "A hyper-modern portfolio setup utilizing glassmorphism, fluid gradients, and borderless UI elements.",
+  "base_config": {
+    "site": {
+      "site_title": "Creative Studio",
+      "site_subtitle": "Digital design and interactive media.",
+      "header_logo_url": "",
+      "home_url": "/"
+    },
+    "typography": {
+      "body_font_stack": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "heading_font_stack": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "mono_font_stack": "ui-monospace, monospace",
+      "base_size": "16px",
+      "scale_ratio": "1.25",
+      "line_height": "1.6",
+      "heading_weight": "800"
+    },
+    "buttons": {
+      "radius": "20px",
+      "border_width": "0px",
+      "text_transform": "none"
+    }
+  },
+  "dark": {
+    "colors": {
+      "bg_base": "#0f172a",
+      "bg_panel": "#1e293b",
+      "bg_elevated": "#334155",
+      "fg_base": "#f8fafc",
+      "fg_muted": "#94a3b8",
+      "accent": "#38bdf8",
+      "border": "#334155"
+    }
+  },
+  "light": {
+    "colors": {
+      "bg_base": "#f8fafc",
+      "bg_panel": "#ffffff",
+      "bg_elevated": "#f1f5f9",
+      "fg_base": "#0f172a",
+      "fg_muted": "#64748b",
+      "accent": "#0ea5e9",
+      "border": "#e2e8f0"
+    }
+  }
+}
