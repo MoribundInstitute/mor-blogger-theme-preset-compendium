@@ -1,0 +1,49 @@
+{
+  "id": "retro_mmorpg",
+  "name": "Retro MMORPG",
+  "description": "Dark UI panels, red interface buttons, and gold text with black drop shadows.",
+  "base_config": {
+    "site": {
+      "site_title": "The Adventurer's Log",
+      "site_subtitle": "Buying iron ore 100ea",
+      "header_logo_url": "",
+      "home_url": "/"
+    },
+    "typography": {
+      "body_font_stack": "Georgia, 'Times New Roman', Times, serif",
+      "heading_font_stack": "Georgia, 'Times New Roman', Times, serif",
+      "mono_font_stack": "'Courier New', Courier, monospace",
+      "base_size": "16px",
+      "scale_ratio": "1.2",
+      "line_height": "1.5",
+      "heading_weight": "700"
+    },
+    "buttons": {
+      "radius": "2px",
+      "border_width": "2px",
+      "text_transform": "none"
+    }
+  },
+  "dark": {
+    "colors": {
+      "bg_base": "#000000",
+      "bg_panel": "#413525",
+      "bg_elevated": "#4e402d",
+      "fg_base": "#c8c0a8",
+      "fg_muted": "#908673",
+      "accent": "#ff981f",
+      "border": "#19140d"
+    }
+  },
+  "light": {
+    "colors": {
+      "bg_base": "#1a1a1a",
+      "bg_panel": "#544531",
+      "bg_elevated": "#63523b",
+      "fg_base": "#e3dbbf",
+      "fg_muted": "#a89d87",
+      "accent": "#ffff00",
+      "border": "#201a11"
+    }
+  }
+}
