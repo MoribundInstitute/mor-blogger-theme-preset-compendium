@@ -1,0 +1,49 @@
+{
+  "id": "neon_cyberpunk",
+  "name": "Neon Cyberpunk",
+  "description": "Aggressive neon accents, dark surfaces, and monospace typography.",
+  "base_config": {
+    "site": {
+      "site_title": "SYS//ADMIN",
+      "site_subtitle": "Unauthorized access will be logged.",
+      "header_logo_url": "",
+      "home_url": "/"
+    },
+    "typography": {
+      "body_font_stack": "'Courier New', Courier, monospace",
+      "heading_font_stack": "'Courier New', Courier, monospace",
+      "mono_font_stack": "'Courier New', Courier, monospace",
+      "base_size": "15px",
+      "scale_ratio": "1.2",
+      "line_height": "1.5",
+      "heading_weight": "700"
+    },
+    "buttons": {
+      "radius": "0px",
+      "border_width": "2px",
+      "text_transform": "uppercase"
+    }
+  },
+  "dark": {
+    "colors": {
+      "bg_base": "#050505",
+      "bg_panel": "#0a0a0a",
+      "bg_elevated": "#111111",
+      "fg_base": "#e0e0e0",
+      "fg_muted": "#00ffcc",
+      "accent": "#ff00ff",
+      "border": "#333333"
+    }
+  },
+  "light": {
+    "colors": {
+      "bg_base": "#1a1a24",
+      "bg_panel": "#222233",
+      "bg_elevated": "#2a2a3d",
+      "fg_base": "#ffffff",
+      "fg_muted": "#00ffcc",
+      "accent": "#ff00ff",
+      "border": "#444466"
+    }
+  }
+}
