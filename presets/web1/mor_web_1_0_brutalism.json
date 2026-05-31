@@ -1,0 +1,35 @@
+{
+  "site": {
+    "site_title": "The Message Board",
+    "site_subtitle": "Best viewed in Netscape Navigator.",
+    "header_logo_url": "",
+    "home_url": "/"
+  },
+  "colors": {
+    "bg_base": "#c0c0c0",
+    "bg_panel": { "mode": "Solid", "color": "#ffffff", "gradient_from": "#ffffff", "gradient_to": "#ffffff", "gradient_angle_deg": 180 },
+    "bg_elevated": { "mode": "Solid", "color": "#e0e0e0", "gradient_from": "#e0e0e0", "gradient_to": "#e0e0e0", "gradient_angle_deg": 180 },
+    "fg_base": "#000000",
+    "fg_muted": "#404040",
+    "accent": "#0000ee",
+    "border": "#808080"
+  },
+  "background": {
+    "mode": { "Solid": { "color": "#c0c0c0" } }
+  },
+  "typography": {
+    "body_font_stack": "'Times New Roman', Times, serif",
+    "heading_font_stack": "Arial, Helvetica, sans-serif",
+    "mono_font_stack": "'Courier New', Courier, monospace",
+    "base_size": "16px",
+    "scale_ratio": "1.2",
+    "line_height": "1.4",
+    "heading_weight": "bold"
+  },
+  "buttons": {
+    "radius": "0px",
+    "border_width": "2px",
+    "text_transform": "none"
+  },
+  "preset_css": "/* Web 1.0 Inject */\n* { border-radius: 0 !important; box-shadow: none !important; }\n.mor-post, .runelite-panel, .main-header, .mor-footer { border-style: ridge; border-width: 3px; border-color: var(--border-color); }\n.main-header { background: linear-gradient(90deg, #000080 0%, #1084d0 100%) !important; color: #ffffff !important; border-bottom: 2px solid #000040; }\n.main-header .institute-title, .main-header .mor-nav a { color: #ffffff !important; font-family: 'MS Sans Serif', Tahoma, sans-serif; }\nbutton, .pager-btn { border-style: outset; border-color: #ffffff #808080 #808080 #ffffff; font-family: 'MS Sans Serif', Tahoma, sans-serif; background: #c0c0c0 !important; color: #000 !important; }\nbutton:active { border-style: inset; border-color: #808080 #ffffff #ffffff #808080; }"
+}

@@ -1,0 +1,35 @@
+{
+  "site": {
+    "site_title": "SYS//ADMIN",
+    "site_subtitle": "Unauthorized access will be logged.",
+    "header_logo_url": "",
+    "home_url": "/"
+  },
+  "colors": {
+    "bg_base": "#050505",
+    "bg_panel": { "mode": "Solid", "color": "#0a0a0a", "gradient_from": "#0a0a0a", "gradient_to": "#0a0a0a", "gradient_angle_deg": 180 },
+    "bg_elevated": { "mode": "Solid", "color": "#111111", "gradient_from": "#111111", "gradient_to": "#111111", "gradient_angle_deg": 180 },
+    "fg_base": "#e0e0e0",
+    "fg_muted": "#00ffcc",
+    "accent": "#ff00ff",
+    "border": "#333333"
+  },
+  "background": {
+    "mode": { "Solid": { "color": "#050505" } }
+  },
+  "typography": {
+    "body_font_stack": "'Courier New', Courier, monospace",
+    "heading_font_stack": "'Courier New', Courier, monospace",
+    "mono_font_stack": "'Courier New', Courier, monospace",
+    "base_size": "15px",
+    "scale_ratio": "1.2",
+    "line_height": "1.5",
+    "heading_weight": "700"
+  },
+  "buttons": {
+    "radius": "0px",
+    "border_width": "2px",
+    "text_transform": "uppercase"
+  },
+  "preset_css": "/* CRT Cyberpunk Inject */\n.main-header { border-bottom: 2px solid var(--accent); box-shadow: 0 0 10px var(--accent); }\n.mor-post, .runelite-panel { border: 1px solid var(--border-color); position: relative; }\n.mor-post::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 50; }\nh1, h2, h3 { text-shadow: 2px 0px 0px var(--accent), -2px 0px 0px var(--fg-muted); letter-spacing: -1px; }"
+}
