@@ -110,10 +110,92 @@
     0% { transform: scale(1) translate(0, 0); opacity: 0.1; }
     100% { transform: scale(1.05) translate(2%, 2%); opacity: 0.2; }
   }
+
+  /* =========================================
+     Global Top Navigation
+     ========================================= */
+  .mor-global-nav {
+    width: 100%;
+    background: rgba(13, 17, 23, 0.80); /* GitHub dark with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gh-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mor-nav-container {
+    max-width: 1150px;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mor-nav-brand {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--gh-text);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mor-nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .mor-nav-link {
+    color: var(--gh-muted);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .mor-nav-link:hover {
+    color: var(--gh-text);
+  }
+
+  .mor-nav-button {
+    background: var(--fluid-glow);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+  }
+
+  .mor-nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(163, 113, 247, 0.3);
+  }
+
+  /* Mobile trigger: Hide standard links, keep the button */
+  @media (max-width: 600px) {
+    .mor-nav-link {
+      display: none;
+    }
+  }
   
   .compendium-header {
     text-align: center;
-    margin-top: 80px;
+    margin-top: 120px; /* Expanded to clear the fixed nav */
     margin-bottom: 60px;
     max-width: 800px;
     padding: 0 20px;
@@ -156,14 +238,13 @@
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 24px;
     width: 100%;
-    /* Removed the side padding so the cards sit flush with the left edge */
     padding: 0 0 80px 0; 
   }
 
   /* Layout Skeleton & Responsiveness */
   .layout-container {
     display: flex;
-    flex-wrap: wrap; /* Allows sidebar to drop elegantly on smaller screens */
+    flex-wrap: wrap;
     max-width: 1150px;
     width: 100%;
     margin: 0 auto;
@@ -174,7 +255,7 @@
 
   .layout-main {
     flex: 1;
-    min-width: 300px; /* Prevents the grid from crushing inward */
+    min-width: 300px;
   }
 
   .layout-sidebar {
@@ -182,7 +263,6 @@
     flex-shrink: 0;
   }
 
-  /* Mobile trigger: Push sidebar below the grid on smaller screens */
   @media (max-width: 850px) {
     .layout-sidebar {
       width: 100%;
@@ -199,7 +279,6 @@
     position: relative;
   }
   
-  /* Fluid Glass Border on Hover */
   .mor-preset-card::after {
     content: "";
     position: absolute;
@@ -272,9 +351,6 @@
     display: inline-block;
   }
 
-  /* --------------------------------------
-     Native Gadget Typography & Headers 
-     -------------------------------------- */
   .sidebar-section h2 {
     font-family: var(--font-mono);
     font-size: 14px;
@@ -295,7 +371,6 @@
     margin-bottom: 24px;
   }
 
-  /* Search Gadget Overrides */
   #BlogSearch1 form {
     display: flex;
     gap: 8px;
@@ -333,7 +408,6 @@
     border-color: #8b949e;
   }
 
-  /* Labels Gadget Overrides (Purple Ink Tag Badges) */
   #Label1 ul {
     list-style: none;
     padding: 0;
@@ -363,7 +437,6 @@
     box-shadow: 0 4px 12px rgba(163, 113, 247, 0.25);
   }
 
-  /* Archive Gadget Overrides */
   #BlogArchive1 ul {
     list-style: none;
     padding: 0;
@@ -385,7 +458,6 @@
     text-decoration: underline;
   }
 
-  /* Pagination Styling */
   #blog-pager {
     display: flex;
     justify-content: space-between;
@@ -409,16 +481,15 @@
   }
   
   #blog-pager a:hover {
-    border-color: rgba(163, 113, 247, 0.5); /* Purple Ink Accent */
+    border-color: rgba(163, 113, 247, 0.5);
     background: rgba(163, 113, 247, 0.05);
     color: rgba(163, 113, 247, 1);
   }
 
-  /* Ecosystem Footer */
   .compendium-footer {
     width: 100%;
     border-top: 1px solid var(--gh-border);
-    background: var(--gh-panel); /* Chalkboard gray base tone */
+    background: var(--gh-panel);
     padding: 60px 20px;
     margin-top: 100px;
     color: var(--gh-muted);
@@ -464,6 +535,24 @@
 ]]></b:skin>
 </head>
 <body>
+<body>
+  <nav class='mor-global-nav'>
+    <div class='mor-nav-container'>
+      <a class='mor-nav-brand' expr:href='data:blog.homepageUrl'>
+        <span style='font-size: 1.2rem;'>📦</span> Moribund
+      </a>
+      <div class='mor-nav-links'>
+        <a class='mor-nav-link' href='/p/categories.html'>Categories</a>
+        <a class='mor-nav-link' href='https://github.com/MoribundInstitute/mor-blogger-theme-preset-compendium' target='_blank'>GitHub</a>
+        <a class='mor-nav-button' href='https://github.com/MoribundInstitute/mor_blogger_theme_editor' target='_blank'>Preset Builder GUI</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class='compendium-header'>
+    <div class='repo-path'>
+      📦 MoribundInstitute / compendium
+    </div>
 <div class='compendium-header'>
     <div class='repo-path'>
       📦 MoribundInstitute / compendium
