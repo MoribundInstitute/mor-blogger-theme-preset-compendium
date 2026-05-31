@@ -462,114 +462,6 @@
     color: rgba(163, 113, 247, 1);
   }
 ]]></b:skin>
-  
-<script>
-    //<![CDATA[
-    class MorThemeGallery extends HTMLElement {
-      connectedCallback() {
-        setTimeout(() => this.hydrate(), 0);
-      }
-
-      async hydrate() {
-        const rawPosts = Array.from(this.querySelectorAll('.preset-raw-data'));
-        
-        if (rawPosts.length === 0) {
-          this.innerHTML = `<div style="text-align: center; padding: 4rem; color: var(--gh-muted); font-family: var(--font-mono);">[ No presets found in this workspace. ]</div>`;
-          return;
-        }
-
-        this.innerHTML = `<div class="mor-gallery-grid"></div>`;
-        const grid = this.querySelector('.mor-gallery-grid');
-
-        for (const post of rawPosts) {
-          const filename = post.querySelector('.preset-title').innerText.trim();
-          const bodyHTML = post.querySelector('.preset-body').innerHTML;
-          
-          const urlMatch = bodyHTML.match(/https:\/\/cdn\.jsdelivr\.net[^"'\s<]+\.json/);
-          
-          if (urlMatch) {
-            const cdnUrl = urlMatch[0];
-            try {
-              const rawRes = await fetch(cdnUrl);
-              if (!rawRes.ok) throw new Error(`HTTP ${rawRes.status}`);
-              const presetData = await rawRes.json();
-              this.renderCard(grid, presetData, cdnUrl, filename);
-            } catch (error) {
-              this.renderErrorCard(grid, filename, `Fetch failed (${error.message}). Check if the JSON is pushed to your public GitHub repo.`);
-            }
-          } else {
-             this.renderErrorCard(grid, filename, "No valid jsDelivr CDN link found in the Blogger post body.");
-          }
-        }
-      }
-
-      renderErrorCard(container, filename, errorMsg) {
-         const card = document.createElement('div');
-         card.className = 'mor-preset-card';
-         card.style.border = "1px solid rgba(248, 81, 73, 0.5)"; // GitHub Error Red
-         card.innerHTML = `
-            <div class="card-gh-header" style="color: #f85149; border-bottom-color: rgba(248, 81, 73, 0.2);">
-              ⚠️ ${filename}
-            </div>
-            <div style="background: var(--gh-panel); padding: 30px 24px; flex-grow: 1; border-radius: 0 0 8px 8px;">
-              <h3 style="color: #f85149; margin-top: 0; font-family: var(--font-ui); font-size: 1.2rem;">Hydration Error</h3>
-              <p style="color: var(--gh-text); font-family: var(--font-mono); font-size: 0.85rem;">${errorMsg}</p>
-            </div>
-         `;
-         container.appendChild(card);
-      }
-
-      renderCard(container, data, downloadUrl, filename) {
-        const base = data.base_config;
-        const colors = data.dark.colors;
-        const bgFill = typeof colors.bg_panel === 'string' ? colors.bg_panel : colors.bg_panel.color;
-        
-        const card = document.createElement('div');
-        card.className = 'mor-preset-card';
-        
-        card.innerHTML = `
-          <div class="card-gh-header">
-            📄 ${filename}
-          </div>
-          <div style="background: ${bgFill}; padding: 30px 24px; display: flex; flex-direction: column; gap: 20px; flex-grow: 1;">
-            <div>
-              <h3 style="margin: 0; color: ${colors.accent}; font-family: '${base.typography.heading_font_stack}'; font-size: 1.6rem; line-height: 1.2;">${data.name}</h3>
-              <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: ${colors.fg_muted}; font-family: var(--font-ui); line-height: 1.5;">${data.description}</p>
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: auto;">
-              <span class="mor-swatch" style="background: ${colors.bg_base}; border: 1px solid ${colors.border};"></span>
-              <span class="mor-swatch" style="background: ${colors.accent}; border: 1px solid ${colors.border};"></span>
-              <span class="mor-swatch" style="background: ${colors.fg_base}; border: 1px solid ${colors.border};"></span>
-            </div>
-          </div>
-          <div class="card-gh-footer">
-            <button class="mor-copy-btn" data-url="${downloadUrl}">
-              Copy JSON URL
-            </button>
-          </div>
-        `;
-
-        const btn = card.querySelector('.mor-copy-btn');
-        btn.addEventListener('click', () => {
-          navigator.clipboard.writeText(downloadUrl);
-          const originalText = btn.innerText;
-          btn.innerHTML = `✔ Copied!`;
-          btn.style.borderColor = "#3fb950";
-          btn.style.color = "#3fb950";
-          setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.style.borderColor = "";
-            btn.style.color = "";
-          }, 2000);
-        });
-
-        container.appendChild(card);
-      }
-    }
-
-    customElements.define('mor-theme-gallery', MorThemeGallery);
-    //]]>
-  </script>
 </head>
 <body>
 <div class='compendium-header'>
@@ -1474,5 +1366,120 @@
       </div>
     </div>
   </footer>
+  <script>
+    //<![CDATA[
+    class MorThemeGallery extends HTMLElement {
+      connectedCallback() {
+        setTimeout(() => this.hydrate(), 0);
+      }
+
+      async hydrate() {
+        const rawPosts = Array.from(this.querySelectorAll('.preset-raw-data'));
+        
+        if (rawPosts.length === 0) {
+          this.innerHTML = `<div style="text-align: center; padding: 4rem; color: var(--gh-muted); font-family: var(--font-mono);">[ No presets found in this workspace. ]</div>`;
+          return;
+        }
+
+        this.innerHTML = `<div class="mor-gallery-grid"></div>`;
+        const grid = this.querySelector('.mor-gallery-grid');
+
+        // FIXED: Use forEach instead of for...of with await. 
+        // This fires all fetch requests concurrently for a massive speed boost.
+        rawPosts.forEach(async (post) => {
+          const filename = post.querySelector('.preset-title').innerText.trim();
+          const bodyHTML = post.querySelector('.preset-body').innerHTML;
+          
+          const urlMatch = bodyHTML.match(/https:\/\/cdn\.jsdelivr\.net[^"'\s<]+\.json/);
+          
+          if (urlMatch) {
+            const cdnUrl = urlMatch[0];
+            try {
+              const rawRes = await fetch(cdnUrl);
+              if (!rawRes.ok) throw new Error(`HTTP ${rawRes.status}`);
+              const presetData = await rawRes.json();
+              this.renderCard(grid, presetData, cdnUrl, filename);
+            } catch (error) {
+              this.renderErrorCard(grid, filename, `Fetch failed (${error.message}).`);
+            }
+          } else {
+             this.renderErrorCard(grid, filename, "No valid jsDelivr CDN link found.");
+          }
+        });
+      }
+
+      renderErrorCard(container, filename, errorMsg) {
+         const card = document.createElement('div');
+         card.className = 'mor-preset-card';
+         card.style.border = "1px solid rgba(248, 81, 73, 0.5)"; // GitHub Error Red
+         card.innerHTML = `
+            <div class="card-gh-header" style="color: #f85149; border-bottom-color: rgba(248, 81, 73, 0.2);">
+              ⚠️ ${filename}
+            </div>
+            <div style="background: var(--gh-panel); padding: 30px 24px; flex-grow: 1; border-radius: 0 0 8px 8px;">
+              <h3 style="color: #f85149; margin-top: 0; font-family: var(--font-ui); font-size: 1.2rem;">Hydration Error</h3>
+              <p style="color: var(--gh-text); font-family: var(--font-mono); font-size: 0.85rem;">${errorMsg}</p>
+            </div>
+         `;
+         container.appendChild(card);
+      }
+
+      renderCard(container, data, downloadUrl, filename) {
+        // FIXED: Point directly to the new flat JSON schema keys with safe fallbacks
+        const colors = data.colors || {};
+        const typography = data.typography || {};
+        
+        // Safely extract the background fill (handling the new SurfaceFill object)
+        let bgFill = "#161b22"; // GitHub dark panel fallback
+        if (colors.bg_panel) {
+          bgFill = typeof colors.bg_panel === 'string' ? colors.bg_panel : colors.bg_panel.color;
+        }
+        
+        const card = document.createElement('div');
+        card.className = 'mor-preset-card';
+        
+        card.innerHTML = `
+          <div class="card-gh-header">
+            📄 ${filename}
+          </div>
+          <div style="background: ${bgFill}; padding: 30px 24px; display: flex; flex-direction: column; gap: 20px; flex-grow: 1;">
+            <div>
+              <h3 style="margin: 0; color: ${colors.accent || '#58a6ff'}; font-family: '${typography.heading_font_stack || 'sans-serif'}'; font-size: 1.6rem; line-height: 1.2;">${data.name || 'Unnamed Preset'}</h3>
+              <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: ${colors.fg_muted || '#8b949e'}; font-family: var(--font-ui); line-height: 1.5;">${data.description || ''}</p>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: auto;">
+              <span class="mor-swatch" style="background: ${colors.bg_base || '#0d1117'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+              <span class="mor-swatch" style="background: ${colors.accent || '#58a6ff'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+              <span class="mor-swatch" style="background: ${colors.fg_base || '#c9d1d9'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+            </div>
+          </div>
+          <div class="card-gh-footer">
+            <button class="mor-copy-btn" data-url="${downloadUrl}">
+              Copy JSON URL
+            </button>
+          </div>
+        `;
+
+        const btn = card.querySelector('.mor-copy-btn');
+        btn.addEventListener('click', () => {
+          navigator.clipboard.writeText(downloadUrl);
+          const originalText = btn.innerText;
+          btn.innerHTML = `✔ Copied!`;
+          btn.style.borderColor = "#3fb950";
+          btn.style.color = "#3fb950";
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.borderColor = "";
+            btn.style.color = "";
+          }, 2000);
+        });
+
+        container.appendChild(card);
+      }
+    }
+
+    customElements.define('mor-theme-gallery', MorThemeGallery);
+    //]]>
+</script>
 </body>
 </html>
