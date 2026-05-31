@@ -1366,7 +1366,7 @@
       </div>
     </div>
   </footer>
-  <script>
+<script>
     //<![CDATA[
     class MorThemeGallery extends HTMLElement {
       connectedCallback() {
@@ -1384,8 +1384,7 @@
         this.innerHTML = `<div class="mor-gallery-grid"></div>`;
         const grid = this.querySelector('.mor-gallery-grid');
 
-        // FIXED: Use forEach instead of for...of with await. 
-        // This fires all fetch requests concurrently for a massive speed boost.
+        // Fires all fetch requests concurrently for a massive speed boost.
         rawPosts.forEach(async (post) => {
           const filename = post.querySelector('.preset-title').innerText.trim();
           const bodyHTML = post.querySelector('.preset-body').innerHTML;
@@ -1425,27 +1424,32 @@
       }
 
       renderCard(container, data, downloadUrl, filename) {
-        // FIXED: Point directly to the new flat JSON schema keys with safe fallbacks
+        // Safe fallbacks for the flat schema
         const colors = data.colors || {};
         const typography = data.typography || {};
+        const site = data.site || {};
         
-        // Safely extract the background fill (handling the new SurfaceFill object)
-        let bgFill = "#161b22"; // GitHub dark panel fallback
+        // Safely extract the background fill
+        let bgFill = "#161b22"; 
         if (colors.bg_panel) {
           bgFill = typeof colors.bg_panel === 'string' ? colors.bg_panel : colors.bg_panel.color;
         }
+        
+        // Map the post title and site subtitle to replace the missing name/description
+        const cleanName = filename.replace('📄 ', '').trim();
+        const description = site.site_subtitle || '';
         
         const card = document.createElement('div');
         card.className = 'mor-preset-card';
         
         card.innerHTML = `
           <div class="card-gh-header">
-            📄 ${filename}
+            📄 ${cleanName}
           </div>
           <div style="background: ${bgFill}; padding: 30px 24px; display: flex; flex-direction: column; gap: 20px; flex-grow: 1;">
             <div>
-              <h3 style="margin: 0; color: ${colors.accent || '#58a6ff'}; font-family: '${typography.heading_font_stack || 'sans-serif'}'; font-size: 1.6rem; line-height: 1.2;">${data.name || 'Unnamed Preset'}</h3>
-              <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: ${colors.fg_muted || '#8b949e'}; font-family: var(--font-ui); line-height: 1.5;">${data.description || ''}</p>
+              <h3 style="margin: 0; color: ${colors.accent || '#58a6ff'}; font-family: '${typography.heading_font_stack || 'sans-serif'}'; font-size: 1.6rem; line-height: 1.2;">${cleanName}</h3>
+              <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: ${colors.fg_muted || '#8b949e'}; font-family: var(--font-ui); line-height: 1.5;">${description}</p>
             </div>
             <div style="display: flex; gap: 10px; margin-top: auto;">
               <span class="mor-swatch" style="background: ${colors.bg_base || '#0d1117'}; border: 1px solid ${colors.border || '#30363d'};"></span>
@@ -1480,6 +1484,6 @@
 
     customElements.define('mor-theme-gallery', MorThemeGallery);
     //]]>
-</script>
+  </script>
 </body>
 </html>
