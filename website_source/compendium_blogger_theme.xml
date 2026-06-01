@@ -535,14 +535,16 @@
 ]]></b:skin>
 </head>
 <body>
-<body>
-  <nav class='mor-global-nav'>
+<nav class='mor-global-nav'>
     <div class='mor-nav-container'>
       <a class='mor-nav-brand' expr:href='data:blog.homepageUrl'>
         <span style='font-size: 1.2rem;'>📦</span> Moribund
       </a>
       <div class='mor-nav-links'>
         <a class='mor-nav-link' href='/p/categories.html'>Categories</a>
+        
+        <a class='mor-nav-link' href='https://forms.gle/WiLpDSATVW3mPhBE8' target='_blank'>Submit Theme</a>
+        
         <a class='mor-nav-link' href='https://github.com/MoribundInstitute/mor-blogger-theme-preset-compendium' target='_blank'>GitHub</a>
         <a class='mor-nav-button' href='https://github.com/MoribundInstitute/mor_blogger_theme_editor' target='_blank'>Preset Builder GUI</a>
       </div>
@@ -550,10 +552,6 @@
   </nav>
 
   <div class='compendium-header'>
-    <div class='repo-path'>
-      📦 MoribundInstitute / compendium
-    </div>
-<div class='compendium-header'>
     <div class='repo-path'>
       📦 MoribundInstitute / compendium
     </div>
@@ -600,10 +598,11 @@
         </div>
       </b:loop>
     <b:else/>
-      <mor-theme-gallery>
+     <mor-theme-gallery>
         <b:loop values='data:posts' var='post'>
           <div class='preset-raw-data' style='display: none;'>
             <span class='preset-title'><data:post.title/></span>
+            <span class='preset-url'><data:post.url/></span>
             <div class='preset-body'><data:post.body/></div>
           </div>
         </b:loop>
@@ -812,8 +811,7 @@
   </a>
 </b:includable>
           <b:includable id='commentsLinkIframe'>
-  <!-- G+ comments, no longer available. The includable is retained for backwards-compatibility. -->
-</b:includable>
+  </b:includable>
           <b:includable id='commentsTitle'>
   <h3 class='title'><data:messages.comments/></h3>
 </b:includable>
@@ -827,7 +825,6 @@
 </b:includable>
           <b:includable id='emailPostIcon'>
   <span class='byline post-icons'>
-    <!-- email post links -->
     <span class='item-action'>
       <a expr:href='data:post.emailPostUrl' expr:title='data:messages.emailPost'>
         <b:include data='{ iconClass: &quot;touch-icon sharing-icon&quot; }' name='emailIcon'/>
@@ -841,14 +838,12 @@
   </b:with>
 </b:includable>
           <b:includable id='feedLinks'>
-  <b:if cond='!data:view.isPost'> <!-- Blog feed links -->
-    <b:if cond='data:feedLinks'>
+  <b:if cond='!data:view.isPost'> <b:if cond='data:feedLinks'>
       <div class='blog-feeds'>
         <b:include data='feedLinks' name='feedLinksBody'/>
       </div>
     </b:if>
-  <b:else/> <!--Post feed links -->
-    <div class='post-feeds'>
+  <b:else/> <div class='post-feeds'>
       <b:loop values='data:posts' var='post'>
         <b:if cond='data:post.allowComments and data:post.feedLinks'>
           <b:include data='post.feedLinks' name='feedLinksBody'/>
@@ -897,12 +892,10 @@
     </a>
   </b:includable>
           <b:includable id='iframeComments' var='post'>
-  <!-- G+ comments, no longer available. The includable is retained for backwards-compatibility. -->
-</b:includable>
+  </b:includable>
           <b:includable id='inlineAd' var='post'>
   <b:if cond='!data:view.isPreview'>
     <b:if cond='data:this.adCode or data:this.adClientId or data:blog.adsenseClientId'>
-      <!-- Ad -->
       <div class='inline-ad'>
         <b:if cond='data:this.adCode != &quot;&quot;'>
           <data:this.adCode/>
@@ -976,7 +969,6 @@
   </span>
 </b:includable>
           <b:includable id='postBody' var='post'>
-  <!-- If metaDescription is empty, use the post body as the schema.org description too, for G+/FB snippeting. -->
   <div class='post-body entry-content float-container' expr:id='&quot;post-body-&quot; + data:post.id'>
     <data:post.body/>
   </div>
@@ -986,19 +978,15 @@
 </b:includable>
           <b:includable id='postCommentsAndAd' var='post'>
   <article class='post-outer-container'>
-    <!-- Post title and body -->
     <div class='post-outer'>
       <b:include data='post' name='post'/>
     </div>
 
-    <!-- Comments -->
     <b:include cond='data:view.isSingleItem' data='post' name='commentPicker'/>
 
-    <!-- Show ad inside post container, after comments, if single item. -->
     <b:include cond='data:view.isSingleItem and data:post.includeAd' data='post' name='inlineAd'/>
   </article>
 
-  <!-- Show ad outside post container (between posts) for feed pages. -->
   <b:include cond='data:view.isMultipleItems and data:post.includeAd' data='post' name='inlineAd'/>
 </b:includable>
           <b:includable id='postCommentsLink'>
@@ -1091,12 +1079,10 @@
     </div>
   </b:includable>
           <b:includable id='postReactions'>
-  <!-- Reaction feature no longer available. The includable is retained for backwards-compatibility. -->
-</b:includable>
+  </b:includable>
           <b:includable id='postShareButtons'>
   <div class='byline post-share-buttons goog-inline-block'>
     <b:with value='data:sharingId ?: ((data:widget.instanceId ?: &quot;sharing&quot;) + &quot;-&quot; + (data:regionName ?: &quot;byline&quot;) + &quot;-&quot; + data:post.id)' var='sharingId'>
-      <!-- Note: 'sharingButtons' includable is from the default Sharing widget markup. -->
       <b:include data='{                                                sharingId: data:sharingId,                                                originalUrl: data:post.url,                                                platforms: data:this.sharing.platforms,                                                shareUrl: data:post.shareUrl,                                                shareTitle: data:post.title,                                              }' name='sharingButtons'/>
     </b:with>
   </div>
@@ -1227,7 +1213,6 @@
   </section>
 </b:includable>
           <b:includable id='tooltipCss'>
-  <!-- LINT.IfChange -->
   <style>
     .post-body a.b-tooltip-container {
       position: relative;
@@ -1262,171 +1247,174 @@
       }
     }
   </style>
-  <!-- LINT.ThenChange(//depot/google3/java/com/google/blogger/b2/layouts/widgets/v2-style.css) -->
-</b:includable>
+  </b:includable>
         </b:widget>
       </b:section>
     </main>
     
-    <aside class='layout-sidebar'>
-      <b:section class='sidebar-section' id='sidebar' showaddelement='true'>
-        <b:widget id='BlogSearch1' locked='false' title='Search Presets' type='BlogSearch' version='2' visible='true'>
-          <b:includable id='main'>
-            <h2><data:title/></h2>
-            <div class='widget-content'>
-              <form expr:action='data:blog.searchUrl'>
-                <input class='searchInput' name='q' placeholder='Search themes...' type='text'/>
-                <input class='searchButton' type='submit' value='Search'/>
-              </form>
+   <b:if cond='data:blog.pageName != &quot;Preset Builder&quot;'>
+  <aside class='layout-sidebar'>
+    <b:section class='sidebar-section' id='sidebar' showaddelement='true'>
+      <b:widget id='BlogSearch1' locked='false' title='Search Presets' type='BlogSearch' version='2' visible='true'>
+        <b:includable id='main'>
+          <h2><data:title/></h2>
+          <div class='widget-content'>
+            <form expr:action='data:blog.searchUrl'>
+              <input class='searchInput' name='q' placeholder='Search themes...' type='text'/>
+              <input class='searchButton' type='submit' value='Search'/>
+            </form>
+          </div>
+        </b:includable>
+        <b:includable id='content'>
+          <div class='widget-content' role='search'>
+            <b:include name='searchForm'/>
+          </div>
+        </b:includable>
+        <b:includable id='searchForm'>
+          <form expr:action='data:blog.searchUrl'>
+            <b:attr cond='not data:view.isPreview' name='target' value='_top'/>
+            <b:include name='urlParamsAsFormInput'/>
+            <div class='search-input'>
+              <input autocomplete='off' expr:aria-label='data:messages.searchThisBlog' expr:placeholder='data:messages.searchThisBlog' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;' name='q'/>
             </div>
-          </b:includable>
-          <b:includable id='content'>
-  <div class='widget-content' role='search'>
-    <b:include name='searchForm'/>
-  </div>
-</b:includable>
-          <b:includable id='searchForm'>
-  <form expr:action='data:blog.searchUrl'>
-    <b:attr cond='not data:view.isPreview' name='target' value='_top'/>
-    <b:include name='urlParamsAsFormInput'/>
-    <div class='search-input'>
-      <input autocomplete='off' expr:aria-label='data:messages.searchThisBlog' expr:placeholder='data:messages.searchThisBlog' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;' name='q'/>
-    </div>
-    <b:include name='searchSubmit'/>
-  </form>
-</b:includable>
-          <b:includable id='searchSubmit'>
-  <input class='search-action' expr:value='data:messages.search.escaped' type='submit'/>
-</b:includable>
-        </b:widget>
-        <b:widget id='Label1' locked='false' title='Browse by Categories' type='Label' version='2' visible='true'>
-          <b:widget-settings>
-            <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
-            <b:widget-setting name='display'>LIST</b:widget-setting>
-            <b:widget-setting name='selectedLabelsList'/>
-            <b:widget-setting name='showType'>ALL</b:widget-setting>
-            <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main' var='this'>
-            <h2 style='cursor: pointer;'>
-              <a href='/p/categories.html' style='color: inherit; text-decoration: none; display: flex; justify-content: space-between; align-items: center;'>
-                <data:title/>
-                <span style='font-family: var(--font-ui); font-size: 16px; color: var(--gh-link);'>&#10132;</span>
+            <b:include name='searchSubmit'/>
+          </form>
+        </b:includable>
+        <b:includable id='searchSubmit'>
+          <input class='search-action' expr:value='data:messages.search.escaped' type='submit'/>
+        </b:includable>
+      </b:widget>
+      
+      <b:widget id='Label1' locked='false' title='Browse by Categories' type='Label' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+          <b:widget-setting name='display'>LIST</b:widget-setting>
+          <b:widget-setting name='selectedLabelsList'/>
+          <b:widget-setting name='showType'>ALL</b:widget-setting>
+          <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main' var='this'>
+          <h2 style='cursor: pointer;'>
+            <a href='/p/categories.html' style='color: inherit; text-decoration: none; display: flex; justify-content: space-between; align-items: center;'>
+              <data:title/>
+              <span style='font-family: var(--font-ui); font-size: 16px; color: var(--gh-link);'>&#10132;</span>
+            </a>
+          </h2>
+          <b:include name='content'/>
+        </b:includable>
+        <b:includable id='cloud'>
+          <b:loop values='data:labels' var='label'>
+            <span class='label-size'>
+              <b:class expr:name='&quot;label-size-&quot; + data:label.cssSize'/>
+              <a class='label-name' expr:href='data:label.url'>
+                <data:label.name/>
+                <b:if cond='data:this.showFreqNumbers'>
+                  <span class='label-count'><data:label.count/></span>
+                </b:if>
               </a>
-            </h2>
-            <b:include name='content'/>
-          </b:includable>
-          <b:includable id='cloud'>
+            </span>
+          </b:loop>
+        </b:includable>
+        <b:includable id='content'>
+          <div class='widget-content'>
+            <b:class expr:name='data:this.display + &quot;-label-widget-content&quot;'/>
+            <b:include cond='data:this.display == &quot;list&quot;' name='list'/>
+            <b:include cond='data:this.display == &quot;cloud&quot;' name='cloud'/>
+          </div>
+        </b:includable>
+        <b:includable id='list'>
+          <ul>
             <b:loop values='data:labels' var='label'>
-              <span class='label-size'>
-                <b:class expr:name='&quot;label-size-&quot; + data:label.cssSize'/>
+              <li>
                 <a class='label-name' expr:href='data:label.url'>
                   <data:label.name/>
                   <b:if cond='data:this.showFreqNumbers'>
                     <span class='label-count'><data:label.count/></span>
                   </b:if>
                 </a>
-              </span>
+              </li>
             </b:loop>
-          </b:includable>
-          <b:includable id='content'>
-            <div class='widget-content'>
-              <b:class expr:name='data:this.display + &quot;-label-widget-content&quot;'/>
-              <b:include cond='data:this.display == &quot;list&quot;' name='list'/>
-              <b:include cond='data:this.display == &quot;cloud&quot;' name='cloud'/>
-            </div>
-          </b:includable>
-          <b:includable id='list'>
+          </ul>
+        </b:includable>
+      </b:widget>
+      
+      <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='showStyle'>HIERARCHY</b:widget-setting>
+          <b:widget-setting name='yearPattern'>yyyy</b:widget-setting>
+          <b:widget-setting name='showWeekEnd'>true</b:widget-setting>
+          <b:widget-setting name='monthPattern'>MMMM</b:widget-setting>
+          <b:widget-setting name='dayPattern'>MMM dd</b:widget-setting>
+          <b:widget-setting name='weekPattern'>MM/dd</b:widget-setting>
+          <b:widget-setting name='chronological'>false</b:widget-setting>
+          <b:widget-setting name='showPosts'>true</b:widget-setting>
+          <b:widget-setting name='frequency'>MONTHLY</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <h2><data:title/></h2>
+          <div class='widget-content'>
             <ul>
-              <b:loop values='data:labels' var='label'>
-                <li>
-                  <a class='label-name' expr:href='data:label.url'>
-                    <data:label.name/>
-                    <b:if cond='data:this.showFreqNumbers'>
-                      <span class='label-count'><data:label.count/></span>
-                    </b:if>
-                  </a>
-                </li>
+              <b:loop values='data:data' var='i'>
+                <li><a expr:href='data:i.url'><data:i.name/></a></li>
               </b:loop>
             </ul>
-          </b:includable>
-        </b:widget>
-        <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive' version='2' visible='true'>
-          <b:widget-settings>
-            <b:widget-setting name='showStyle'>HIERARCHY</b:widget-setting>
-            <b:widget-setting name='yearPattern'>yyyy</b:widget-setting>
-            <b:widget-setting name='showWeekEnd'>true</b:widget-setting>
-            <b:widget-setting name='monthPattern'>MMMM</b:widget-setting>
-            <b:widget-setting name='dayPattern'>MMM dd</b:widget-setting>
-            <b:widget-setting name='weekPattern'>MM/dd</b:widget-setting>
-            <b:widget-setting name='chronological'>false</b:widget-setting>
-            <b:widget-setting name='showPosts'>true</b:widget-setting>
-            <b:widget-setting name='frequency'>MONTHLY</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main'>
-            <h2><data:title/></h2>
-            <div class='widget-content'>
-              <ul>
-                <b:loop values='data:data' var='i'>
-                  <li><a expr:href='data:i.url'><data:i.name/></a></li>
-                </b:loop>
-              </ul>
+          </div>
+        </b:includable>
+        <b:includable id='content'>
+          <div class='widget-content'>
+            <div id='ArchiveList'>
+              <div expr:id='data:widget.instanceId + &quot;_ArchiveList&quot;'>
+                <b:include cond='data:this.style == &quot;HIERARCHY&quot;' name='hierarchy'/>
+                <b:include cond='data:this.style in {&quot;FLAT&quot;, &quot;MENU&quot;}' name='flat'/>
+              </div>
             </div>
-          </b:includable>
-          <b:includable id='content'>
-  <div class='widget-content'>
-    <div id='ArchiveList'>
-      <div expr:id='data:widget.instanceId + &quot;_ArchiveList&quot;'>
-        <b:include cond='data:this.style == &quot;HIERARCHY&quot;' name='hierarchy'/>
-        <b:include cond='data:this.style in {&quot;FLAT&quot;, &quot;MENU&quot;}' name='flat'/>
-      </div>
-    </div>
-  </div>
-</b:includable>
-          <b:includable id='flat'>
-  <ul class='flat'>
-    <b:loop values='data:data' var='i'>
-      <li class='archivedate'>
-        <a expr:href='data:i.url'>
-          <data:i.name/><span class='post-count'><data:i.post-count/></span>
-        </a>
-      </li>
-    </b:loop>
-  </ul>
-</b:includable>
-          <b:includable id='hierarchy'>
-  <b:include data='data' name='interval'/>
-</b:includable>
-          <b:includable id='interval' var='intervals'>
-  <ul class='hierarchy'>
-    <b:loop values='data:intervals' var='interval'>
-      <li class='archivedate'>
-        <div class='hierarchy-title'>
-          <a class='post-count-link' expr:href='data:interval.url'>
-            <data:interval.name/>
-            <span class='post-count'><data:interval.post-count/></span>
-          </a>
-        </div>
-        <div class='hierarchy-content'>
-          <b:include cond='data:interval.data' data='interval.data' name='interval'/>
-          <b:include cond='data:interval.posts' data='interval.posts' name='posts'/>
-        </div>
-      </li>
-    </b:loop>
-  </ul>
-</b:includable>
-          <b:includable id='posts' var='posts'>
-  <ul class='posts hierarchy'>
-    <b:loop values='data:posts' var='post'>
-      <li>
-        <a expr:href='data:post.url'><data:post.title/></a>
-      </li>
-    </b:loop>
-  </ul>
-</b:includable>
-        </b:widget>
-      </b:section>
-    </aside>
+          </div>
+        </b:includable>
+        <b:includable id='flat'>
+          <ul class='flat'>
+            <b:loop values='data:data' var='i'>
+              <li class='archivedate'>
+                <a expr:href='data:i.url'>
+                  <data:i.name/><span class='post-count'><data:i.post-count/></span>
+                </a>
+              </li>
+            </b:loop>
+          </ul>
+        </b:includable>
+        <b:includable id='hierarchy'>
+          <b:include data='data' name='interval'/>
+        </b:includable>
+        <b:includable id='interval' var='intervals'>
+          <ul class='hierarchy'>
+            <b:loop values='data:intervals' var='interval'>
+              <li class='archivedate'>
+                <div class='hierarchy-title'>
+                  <a class='post-count-link' expr:href='data:interval.url'>
+                    <data:interval.name/>
+                    <span class='post-count'><data:interval.post-count/></span>
+                  </a>
+                </div>
+                <div class='hierarchy-content'>
+                  <b:include cond='data:interval.data' data='interval.data' name='interval'/>
+                  <b:include cond='data:interval.posts' data='interval.posts' name='posts'/>
+                </div>
+              </li>
+            </b:loop>
+          </ul>
+        </b:includable>
+        <b:includable id='posts' var='posts'>
+          <ul class='posts hierarchy'>
+            <b:loop values='data:posts' var='post'>
+              <li>
+                <a expr:href='data:post.url'><data:post.title/></a>
+              </li>
+            </b:loop>
+          </ul>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </aside>
+</b:if>
 
   </div>
   
@@ -1455,7 +1443,7 @@
       </div>
     </div>
   </footer>
-<script>
+ <script>
     //<![CDATA[
     class MorThemeGallery extends HTMLElement {
       connectedCallback() {
@@ -1476,8 +1464,16 @@
         // Fires all fetch requests concurrently for a massive speed boost.
         rawPosts.forEach(async (post) => {
           const filename = post.querySelector('.preset-title').innerText.trim();
-          const bodyHTML = post.querySelector('.preset-body').innerHTML;
           
+          // 1. Safely extract the Post URL (Fallback to '#' if the span is missing)
+          const urlSpan = post.querySelector('.preset-url');
+          const postUrl = urlSpan ? urlSpan.innerText.trim() : '#';
+          
+          // 2. Extract the first image from the post body for the thumbnail
+          const imgTag = post.querySelector('.preset-body img');
+          const thumbUrl = imgTag ? imgTag.src : null;
+
+          const bodyHTML = post.querySelector('.preset-body').innerHTML;
           const urlMatch = bodyHTML.match(/https:\/\/cdn\.jsdelivr\.net[^"'\s<]+\.json/);
           
           if (urlMatch) {
@@ -1486,7 +1482,7 @@
               const rawRes = await fetch(cdnUrl);
               if (!rawRes.ok) throw new Error(`HTTP ${rawRes.status}`);
               const presetData = await rawRes.json();
-              this.renderCard(grid, presetData, cdnUrl, filename);
+              this.renderCard(grid, presetData, cdnUrl, filename, postUrl, thumbUrl);
             } catch (error) {
               this.renderErrorCard(grid, filename, `Fetch failed (${error.message}).`);
             }
@@ -1512,7 +1508,7 @@
          container.appendChild(card);
       }
 
-      renderCard(container, data, downloadUrl, filename) {
+      renderCard(container, data, downloadUrl, filename, postUrl, thumbUrl) {
         // Safe fallbacks for the flat schema
         const colors = data.colors || {};
         const typography = data.typography || {};
@@ -1524,28 +1520,37 @@
           bgFill = typeof colors.bg_panel === 'string' ? colors.bg_panel : colors.bg_panel.color;
         }
         
-        // Map the post title and site subtitle to replace the missing name/description
+        // Map the post title and site subtitle
         const cleanName = filename.replace('📄 ', '').trim();
         const description = site.site_subtitle || '';
         
         const card = document.createElement('div');
         card.className = 'mor-preset-card';
         
+        // Build the optional thumbnail HTML string
+        const thumbnailHtml = thumbUrl 
+          ? `<div style="height: 160px; width: 100%; background-image: url('${thumbUrl}'); background-size: cover; background-position: top center; border-bottom: 1px solid ${colors.border || '#30363d'};"></div>` 
+          : '';
+
+        // Wrap the visual parts in an <a> tag pointing to postUrl
         card.innerHTML = `
-          <div class="card-gh-header">
-            📄 ${cleanName}
-          </div>
-          <div style="background: ${bgFill}; padding: 30px 24px; display: flex; flex-direction: column; gap: 20px; flex-grow: 1;">
-            <div>
-              <h3 style="margin: 0; color: ${colors.accent || '#58a6ff'}; font-family: '${typography.heading_font_stack || 'sans-serif'}'; font-size: 1.6rem; line-height: 1.2;">${cleanName}</h3>
-              <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: ${colors.fg_muted || '#8b949e'}; font-family: var(--font-ui); line-height: 1.5;">${description}</p>
+          <a href="${postUrl}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; flex-grow: 1;">
+            <div class="card-gh-header">
+              📄 ${cleanName}
             </div>
-            <div style="display: flex; gap: 10px; margin-top: auto;">
-              <span class="mor-swatch" style="background: ${colors.bg_base || '#0d1117'}; border: 1px solid ${colors.border || '#30363d'};"></span>
-              <span class="mor-swatch" style="background: ${colors.accent || '#58a6ff'}; border: 1px solid ${colors.border || '#30363d'};"></span>
-              <span class="mor-swatch" style="background: ${colors.fg_base || '#c9d1d9'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+            ${thumbnailHtml}
+            <div style="background: ${bgFill}; padding: 24px; display: flex; flex-direction: column; gap: 16px; flex-grow: 1;">
+              <div>
+                <h3 style="margin: 0; color: ${colors.accent || '#58a6ff'}; font-family: '${typography.heading_font_stack || 'sans-serif'}'; font-size: 1.5rem; line-height: 1.2;">${cleanName}</h3>
+                <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: ${colors.fg_muted || '#8b949e'}; font-family: var(--font-ui); line-height: 1.5;">${description}</p>
+              </div>
+              <div style="display: flex; gap: 10px; margin-top: auto;">
+                <span class="mor-swatch" style="background: ${colors.bg_base || '#0d1117'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+                <span class="mor-swatch" style="background: ${colors.accent || '#58a6ff'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+                <span class="mor-swatch" style="background: ${colors.fg_base || '#c9d1d9'}; border: 1px solid ${colors.border || '#30363d'};"></span>
+              </div>
             </div>
-          </div>
+          </a>
           <div class="card-gh-footer">
             <button class="mor-copy-btn" data-url="${downloadUrl}">
               Copy JSON URL
