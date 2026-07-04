@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <defs>
+    <g id="c">
+      <path d="M14 96 V34 Q14 14 34 14 H96" fill="none" stroke="#b9b9fa" stroke-width="16" opacity="0.12"/>
+      <path d="M14 96 V34 Q14 14 34 14 H96" fill="none" stroke="#b9b9fa" stroke-width="5"/>
+      <path d="M30 96 V44 Q30 30 44 30 H96" fill="none" stroke="#b9b9fa" stroke-width="2" opacity="0.5"/>
+      <path d="M40 6 L74 40 L40 74 L6 40 Z" fill="#b9b9fa" opacity="0.15"/>
+      <path d="M40 12 L68 40 L40 68 L12 40 Z" fill="#b9b9fa"/>
+      <path d="M40 24 L56 40 L40 56 L24 40 Z" fill="#080808"/>
+      <circle cx="40" cy="40" r="5" fill="#b9b9fa"/>
+      <circle cx="40" cy="84" r="4" fill="#b9b9fa" opacity="0.85"/>
+      <circle cx="84" cy="40" r="4" fill="#b9b9fa" opacity="0.85"/>
+    </g>
+    <g id="e">
+      <path d="M96 14 H204" stroke="#b9b9fa" stroke-width="16" opacity="0.12"/>
+      <path d="M96 14 H204" stroke="#b9b9fa" stroke-width="5"/>
+      <path d="M96 30 H204" stroke="#b9b9fa" stroke-width="2" opacity="0.5"/>
+    </g>
+  </defs>
+  <use href="#c"/>
+  <use href="#c" transform="translate(300 0) scale(-1 1)"/>
+  <use href="#c" transform="translate(0 300) scale(1 -1)"/>
+  <use href="#c" transform="translate(300 300) scale(-1 -1)"/>
+  <use href="#e"/>
+  <use href="#e" transform="translate(0 300) scale(1 -1)"/>
+  <use href="#e" transform="rotate(90 150 150)"/>
+  <use href="#e" transform="rotate(-90 150 150)"/>
+</svg>
