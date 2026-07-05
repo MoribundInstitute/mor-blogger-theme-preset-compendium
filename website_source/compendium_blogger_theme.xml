@@ -1514,7 +1514,7 @@
           const thumbUrl = imgTag ? imgTag.src : null;
 
           const bodyHTML = post.querySelector('.preset-body').innerHTML;
-          const urlMatch = bodyHTML.match(/https:\/\/cdn\.jsdelivr\.net[^"'\s<]+\.json/);
+          const urlMatch = bodyHTML.match(/https:\/\/cdn\.jsdelivr\.net\/gh\/[^"'\s<]+\.json/);
           
           if (urlMatch) {
             const cdnUrl = urlMatch[0];

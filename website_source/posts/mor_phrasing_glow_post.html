@@ -2,30 +2,53 @@
      Paste into the Blogger post editor in HTML view.
      Structure contract with compendium_blogger_theme.xml's gallery script:
        - FIRST <img> in the body = card thumbnail / OG image source.
-       - First https://cdn.jsdelivr.net/...json URL in the body = the preset the card hydrates from.
+       - First jsDelivr gh/ raw JSON link in the body = the preset the card hydrates from.
        - .mor-preset-card stays an EMPTY mount; all human copy lives outside it. -->
 
-<img src="https://cdn.jsdelivr.net/gh/MoribundInstitute/mor-blogger-theme-preset-compendium@main/previews/mor_phrasing_glow.png" alt="MorPhrasing Glow — lavender glow on near-black with an antique serif and a rune-cornered frame" width="1200" height="630" />
+<img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdJx0PTc3EnjkfNV2GMXrQPTDlQ28vYpfMdyfsABqOJbFCo7BV_l8-BGBxg3HWZBxy_-WKei6ncjrueMxMvtnIs2Fj-_UwN_wmfnLgeobKQWrdGQ0Ufw6zGzVHHypmCr5apT009ls6kpDSf2RMl6EMSvtRAnl-iegpyTm-21R2orXV3aVUk2XRSmv5CXZz/s1600/MorPhrasingScreenshot1.png"
+     alt="MorPhrasing Glow — Custom screenshot of my dark Blogger preset preview"
+     width="1200" height="630" />
 
-<div class="mor-preset-card"></div>
+<div style="margin: 15px 0;">
+  <a href="https://morphrasing.blogspot.com/"
+     target="_blank"
+     style="display: inline-block; padding: 8px 16px; background-color: #141414; color: #ECECEB; border: 1px solid #2b2b2b; border-radius: 6px; text-decoration: none; font-family: 'IM Fell English', Georgia, serif; font-size: 14px; cursor: pointer; transition: all 0.2s ease-in-out;"
+     onmouseover="this.style.borderColor='#b9b9fa'; this.style.color='#b9b9fa'; this.style.boxShadow='0 0 8px rgba(185, 185, 250, 0.5)';"
+     onmouseout="this.style.borderColor='#2b2b2b'; this.style.color='#ECECEB'; this.style.boxShadow='none';">
+     See Live Preview &#10132;
+  </a>
+</div>
 
-<h2>MorPhrasing Glow</h2>
-<p>Striking, clever, and beautiful turns of phrase&#8212;unpacked. A lavender glow on near-black, set in IM Fell English, with a RuneLite-style rune frame drawn as a self-contained SVG border-image around posts and side panels.</p>
+<div class="mor-preset-card"
+     data-preset-name="MorPhrasing Glow"
+     data-preset-src="https://cdn.jsdelivr.net/gh/MoribundInstitute/mor-blogger-theme-preset-compendium@main/presets/mor_phrasing_glow.json">
+<noscript>Enable JavaScript to preview this preset, or use the import link below.</noscript>
+</div>
 
-<h3>Palette</h3>
+<p><b>Import URL (raw JSON):</b><br>
+<a href="https://cdn.jsdelivr.net/gh/MoribundInstitute/mor-blogger-theme-preset-compendium@main/presets/mor_phrasing_glow.json">https://cdn.jsdelivr.net/gh/MoribundInstitute/mor-blogger-theme-preset-compendium@main/presets/mor_phrasing_glow.json</a></p>
+
+<p><b>How to apply:</b> Copy the URL above &#8594; open the <b>MorBlogger Theme Editor</b> &#8594; <b>Theme Presets</b> &#8594; <b>Import Compendium Theme</b> &#8594; paste into the <b>Remote JSON URL</b> field &#8594; click <b>Import URL</b>. (A blog must already be created and selected in Blogger before the site fields take effect.)</p>
+
+<p><b>Definition:</b> A near-black reading surface lit from within by soft lavender. Panels, headings, and links carry a faint periwinkle glow — candlelit but electric — over an antique letterpress serif.</p>
+
+<p><b>Palette:</b></p>
 <ul>
-  <li>Background <code>#080808</code> (near-black), panels fade <code>#080808 &#8594; #121212</code></li>
-  <li>Body text <code>#ECECEB</code> (16.9:1 contrast), muted <code>#9d9db8</code> (7.6:1)</li>
-  <li>Accent / glow <code>#b9b9fa</code> lavender (10.9:1)</li>
+<li><b>Base:</b> #080808 &#183; <b>Panel:</b> #080808 &#8594; #121212 (135&#176;) &#183; <b>Elevated:</b> #141414</li>
+<li><b>Text:</b> #ECECEB &#183; <b>Muted:</b> #9d9db8</li>
+<li><b>Accent:</b> #b9b9fa &#183; <b>Border:</b> #2b2b2b</li>
 </ul>
 
-<h3>Import it</h3>
-<ol>
-  <li>Open the <strong>Theme Presets</strong> panel in the MorBlogger Theme Editor.</li>
-  <li>Click the <strong>&#10515;</strong> (Import JSON) button to reveal <strong>Import Compendium Theme</strong>.</li>
-  <li>Paste the preset link into the <strong>Remote JSON URL</strong> field.</li>
-  <li>Click <strong>Import URL</strong>.</li>
-</ol>
+<p><b>Typeface:</b> <i>IM Fell English</i> (Georgia / serif fallback) — 17px base, 1.3 scale, 1.6 line height, headings at normal weight.</p>
 
-<p>Preset JSON:<br />
-<a href="https://cdn.jsdelivr.net/gh/MoribundInstitute/mor-blogger-theme-preset-compendium@main/presets/mor_phrasing_glow.json">https://cdn.jsdelivr.net/gh/MoribundInstitute/mor-blogger-theme-preset-compendium@main/presets/mor_phrasing_glow.json</a></p>
+<p><b>Signature Effects:</b></p>
+<ul>
+<li>Two fixed radial lavender glows across the page background.</li>
+<li>A rune-etched frame on every post panel (<code>.mor-post</code> / <code>.runelite-panel</code>), RuneLite style.</li>
+<li>Lavender box-shadow bloom on post hover; soft heading/link glow that brightens on hover.</li>
+<li>Lavender text-selection highlight; glowing header underline.</li>
+</ul>
+
+<p><b>Buttons:</b> 6px radius, 1px border, no uppercasing.</p>
+
+<p><b>Live site:</b> <a href="https://morphrasing.blogspot.com/" target="_blank">morphrasing.blogspot.com</a></p>
