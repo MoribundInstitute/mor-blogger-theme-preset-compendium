@@ -337,6 +337,33 @@
     border-top: 1px solid var(--gh-border);
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .mor-preview-btn {
+    background: #1a1d33;
+    color: var(--gh-link);
+    border: 1px solid rgba(124, 111, 212, 0.35);
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+    font-family: var(--font-ui);
+    margin-right: auto;
+  }
+
+  .mor-preview-btn:hover {
+    background: rgba(107, 76, 154, 0.15);
+    border-color: var(--nebula-accent);
+    box-shadow: 0 0 10px rgba(124, 111, 212, 0.2);
+    color: #c8d4ff;
   }
   
   .mor-copy-btn {
@@ -1515,6 +1542,8 @@
 
           const bodyHTML = post.querySelector('.preset-body').innerHTML;
           const urlMatch = bodyHTML.match(/https:\/\/cdn\.jsdelivr\.net\/gh\/[^"'\s<]+\.json/);
+          const livePreviewMatch = bodyHTML.match(/data-live-preview=["'](https?:\/\/[^"']+)["']/i);
+          const livePreviewUrl = livePreviewMatch ? livePreviewMatch[1] : null;
           
           if (urlMatch) {
             const cdnUrl = urlMatch[0];
@@ -1522,7 +1551,7 @@
               const rawRes = await fetch(cdnUrl);
               if (!rawRes.ok) throw new Error(`HTTP ${rawRes.status}`);
               const presetData = await rawRes.json();
-              this.renderCard(grid, presetData, cdnUrl, filename, postUrl, thumbUrl);
+              this.renderCard(grid, presetData, cdnUrl, filename, postUrl, thumbUrl, livePreviewUrl);
             } catch (error) {
               this.renderErrorCard(grid, filename, `Fetch failed (${error.message}).`);
             }
@@ -1548,7 +1577,7 @@
          container.appendChild(card);
       }
 
-      renderCard(container, data, downloadUrl, filename, postUrl, thumbUrl) {
+      renderCard(container, data, downloadUrl, filename, postUrl, thumbUrl, livePreviewUrl) {
         // Safe fallbacks for the flat schema
         const colors = data.colors || {};
         const typography = data.typography || {};
@@ -1592,6 +1621,7 @@
             </div>
           </a>
           <div class="card-gh-footer">
+            ${livePreviewUrl ? `<a class="mor-preview-btn" href="${livePreviewUrl}" target="_blank" rel="noopener noreferrer">Live Preview &#10132;</a>` : ''}
             <button class="mor-copy-btn" data-url="${downloadUrl}">
               Copy JSON URL
             </button>
