@@ -1,18 +1,18 @@
 # The Moribund Blogger Theme Compendium
 
-A community-driven repository of highly optimized, modular JSON theme presets for the **Blogger Theme Architect**. 
+A community-driven repository of highly optimized, modular theme presets (JSON or TOML) for the **Blogger Theme Architect**. 
 
 This compendium is dedicated to the revival of the weblog. By stripping away modern bloat and focusing on clean typography, responsive layouts, and distinct aesthetics, we aim to provide writers and developers with an unparalleled toolkit for customizing the Blogger platform.
 
 ## 🏛️ How It Works
 
-The presets in this repository are pure JSON representations of theme tokens (color palettes, typography stacks, button geometries, and localized CSS injections). 
+The presets in this repository are plain-text representations of theme tokens (color palettes, typography stacks, button geometries, and localized CSS injections). Flat JSON presets carry a single palette; full TOML presets additionally carry authored light+dark palettes and `[[variants]]` color schemes (e.g. `mor_branding.toml` ships Default, Verdigris, Incinerate, and Ultramarine Deep). 
 
 They are designed to be imported directly into the Blogger Theme Architect.
 
 ### Importing a Preset
 1. Browse this repository and select a preset you wish to use (e.g., `retro_mmorpg.json`).
-2. Open the raw JSON file and copy its contents, or copy the raw URL.
+2. Open the raw preset file (JSON or TOML) and copy its contents, or copy the raw URL.
 3. Open the **Blogger Theme Architect**.
 4. Navigate to the **Theme Presets** panel and click **Import Remote JSON**.
 5. Paste the data to instantly rehydrate the editor with the new aesthetic.
