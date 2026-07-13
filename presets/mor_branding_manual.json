@@ -1,0 +1,89 @@
+{
+  "site": {
+    "site_title": "MorBranding",
+    "site_subtitle": "Branding decisions of the Moribund Institute — documented, argued, archived.",
+    "header_logo_url": "",
+    "home_url": "/"
+  },
+  "colors": {
+    "bg_base": "#f4f1ea",
+    "bg_panel": {
+      "mode": "Solid",
+      "color": "#ffffff",
+      "gradient_from": "#ffffff",
+      "gradient_to": "#ffffff",
+      "gradient_angle_deg": 180
+    },
+    "bg_elevated": {
+      "mode": "Solid",
+      "color": "#fbfaf6",
+      "gradient_from": "#fbfaf6",
+      "gradient_to": "#fbfaf6",
+      "gradient_angle_deg": 180
+    },
+    "fg_base": "#1a1a1a",
+    "fg_muted": "#6b6659",
+    "accent": "#c8102e",
+    "border": "#d8d3c8",
+    "glow_color": "#c8102e",
+    "glow_spread": "0px",
+    "panel_border_width": "1px"
+  },
+  "assets": {
+    "favicon_url": "",
+    "social_card_image_url": ""
+  },
+  "background": {
+    "mode": {
+      "Solid": {
+        "color": "#f4f1ea"
+      }
+    }
+  },
+  "buttons": {
+    "radius": "0px",
+    "border_width": "2px",
+    "text_transform": "uppercase",
+    "border_style": "solid",
+    "fill": "solid",
+    "border_color": "#1a1a1a",
+    "text_color": "#ffffff",
+    "hover_effect": "lift",
+    "glow_color": "#c8102e",
+    "glow_strength": "0px",
+    "transition_ms": "150ms",
+    "easing": "ease",
+    "focus_ring_color": "#c8102e",
+    "focus_ring_width": "2px"
+  },
+  "typography": {
+    "body_font_stack": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    "heading_font_stack": "'Helvetica Neue', Helvetica, Arial, sans-serif",
+    "mono_font_stack": "'Courier New', Courier, monospace",
+    "base_size": "16px",
+    "scale_ratio": "1.25",
+    "line_height": "1.65",
+    "heading_weight": "700",
+    "elements": [
+      {
+        "selector": "blockquote",
+        "italic": false,
+        "color": "#6b6659"
+      },
+      {
+        "selector": "code",
+        "color": "#c8102e"
+      }
+    ]
+  },
+  "seo": {
+    "meta_description": "Branding decisions of the Moribund Institute — documented, argued, archived.",
+    "meta_keywords": "branding, identity, design, typography, logo, Moribund Institute",
+    "custom_robots": "index, follow"
+  },
+  "scrollbar_width": "10px",
+  "scrollbar_track_color": "#f4f1ea",
+  "scrollbar_thumb_color": "#d8d3c8",
+  "scrollbar_thumb_hover_color": "#c8102e",
+  "preset_css": "/* MorBranding Manual Inject */\n.main-header { border-top: 8px solid var(--accent); border-bottom: 2px solid #1a1a1a; }\n.mor-post { border: 1px solid var(--border-color); border-top: 3px solid #1a1a1a; position: relative; }\n.mor-post::after { content: \"MORIBUND INSTITUTE \\00b7 BRAND FILE\"; position: absolute; top: 10px; right: 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: var(--accent); }\nh1, h2, h3 { text-transform: uppercase; letter-spacing: 0.06em; }\n.post-body { counter-reset: spec; }\n.post-body h2 { counter-increment: spec; }\n.post-body h2::before { content: counter(spec, decimal-leading-zero) \" \\2014 \"; color: var(--accent); }\nblockquote { border-left: 6px solid var(--accent); background: #ffffff; }\na { text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 2px; }\n.post-body img { border: 1px solid var(--border-color); background: #ffffff; padding: 6px; }"
+}
